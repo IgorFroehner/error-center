@@ -44,5 +44,4 @@ public class Event {
     @Column
     private LocalDateTime createdAt;
 
-
 }
