@@ -38,7 +38,7 @@ public class Event {
 
     @NotNull
     @Column
-    private String origem;
+    private Origin origin;
 
     @CreatedDate
     @Column
