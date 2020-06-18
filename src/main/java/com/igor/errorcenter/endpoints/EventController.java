@@ -44,44 +44,44 @@ public class EventController {
     }
 
     @GetMapping("/byOriginAndDate/{idOrigin}/{date}")
-    public List<Event> findByOrigin(@PathVariable("idOrigin") Long idOrigin,
+    public List<Event> findByOriginAndDate(@PathVariable("idOrigin") Long idOrigin,
                                     @PathVariable("date") LocalDateTime date,
                                     Pageable pageable){
         return null;
     }
 
     @GetMapping("/byLevel/{level}")
-    public List<Event> findByLevel(@PathVariable String level, Pageable pageable){
+    public List<Event> findByLevel(@PathVariable("level") String level, Pageable pageable){
         return null;
     }
 
     @GetMapping("/byLevelAndDate/{level}/{date}")
-    public List<Event> findByLevelAndDate(@PathVariable String level,
-                                          @PathVariable LocalDateTime date,
+    public List<Event> findByLevelAndDate(@PathVariable("level") String level,
+                                          @PathVariable("date") LocalDateTime date,
                                           Pageable pageable){
         return null;
     }
 
     @GetMapping("/byLevelAndDateAndOrigin/{level}/{date}/{idOrigin}")
-    List<Event> findByLevelAndDateAndOrigin(@PathVariable String level,
-                                            @PathVariable LocalDateTime date,
-                                            @PathVariable Long idOrigin,
+    List<Event> findByLevelAndDateAndOrigin(@PathVariable("level") String level,
+                                            @PathVariable("date") LocalDateTime date,
+                                            @PathVariable("idOrigin") Long idOrigin,
                                             Pageable pageable){
         return null;
     }
 
     @GetMapping("/byDescription/{description}")
-    List<Event> findByDescription(@PathVariable String description, Pageable pageable){
+    List<Event> findByDescription(@PathVariable("description") String description, Pageable pageable){
         return null;
     }
 
     @GetMapping("/byLog/{log}")
-    List<Event> findByLog(@PathVariable String log, Pageable pageable){
+    List<Event> findByLog(@PathVariable("log") String log, Pageable pageable){
         return null;
     }
 
     @GetMapping("/byDate/{date}")
-    List<Event> findByDate(@PathVariable LocalDateTime date, Pageable pageable){
+    List<Event> findByDate(@PathVariable("date") LocalDateTime date, Pageable pageable){
         return null;
     }
 

@@ -1,5 +1,6 @@
 package com.igor.errorcenter.endpoints;
 
+import com.igor.errorcenter.entity.Origin;
 import com.igor.errorcenter.service.OriginService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,17 +12,17 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/origin")
-public class Origin {
+public class OriginController {
 
     private OriginService originService;
 
     @PostMapping
-    public ResponseEntity<Origin> created(@Valid @RequestBody Origin origin){
+    public ResponseEntity<Origin> created(@Valid @RequestBody OriginController originController){
         return null;
     }
 
     @PutMapping
-    public ResponseEntity<Origin> update(@Valid @RequestBody Origin origin){
+    public ResponseEntity<Origin> update(@Valid @RequestBody OriginController originController){
         return null;
     }
 
@@ -34,6 +35,7 @@ public class Origin {
     Origin findById(@PathVariable("id") Long id){
         return null;
     }
+
     @GetMapping("/byLogin/{login}")
     List<Origin> findByLogin(@PathVariable("login") String login){
         return null;
