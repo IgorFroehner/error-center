@@ -17,13 +17,5 @@ public class EventService implements EventServiceInterface {
     @Autowired
     private EventRepository eventRepository;
 
-    @Override
-    public List<Event> findAll(Pageable pageable) {
-        return null;
-    }
 
-    @Override
-    public List<Event> findByLevel(Pageable pageable) {
-        return null;
-    }
 }

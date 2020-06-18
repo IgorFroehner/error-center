@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
@@ -30,14 +31,15 @@ public class Event {
 
     @NotNull
     @Column
+    @Size(max = 500)
     private String eventDescription;
 
     @NotNull
     @Column
+    @Size(max = 500)
     private String eventLog;
 
-    @NotNull
-    @Column
+    @ManyToOne
     private Origin origin;
 
     @CreatedDate

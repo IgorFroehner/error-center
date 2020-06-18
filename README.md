@@ -10,9 +10,9 @@ Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em se
 Abaixo estão os requisitos desta API, o time terá total liberdade para tomar as decisões técnicas e de arquitetura da API, desde que atendam os requisitos abaixo.
 
 
-## API
+# API
 
-### Premissas
+### Premissas:
 
 * Pensada para atender diretamente um front-end
 * Capaz de gravar logs de erro em um banco de dados relacional
@@ -28,3 +28,28 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
 * Deve suportar Ordenação por diferentes tipos de atributos
 * A consulta de listagem não deve retornar os LOGs dos Eventos
 * Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
+
+### Endpoint
+
+* **Event:**
+    * Event: save
+    * Event: update
+    * void: delete
+    * Event: findById
+    * List<Event> findAll
+    * List<Event> findByOrigin
+    * List<Event> findByOriginAndDate
+    * List<Event> findByLevel
+    * List<Event> findByLevelAndDate
+    * List<Event> findByLevelAndDateAndOrigin
+    * List<Event> findByDescription
+    * List<Event> findByLog
+    * List<Event> findByDate
+
+* **Origin**
+    * Origin save
+    * Origin update
+    * void delete
+    * Origin findById
+    * List<Origin> findByLogin
+    * List<Event> findEvents
