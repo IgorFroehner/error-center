@@ -1,5 +1,8 @@
 package com.igor.errorcenter.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Level {
 
     ERROR("error"),
@@ -12,7 +15,11 @@ public enum Level {
         this.level = level;
     }
 
-    public String getLevel(){
-        return level;
+//    public String getLevel(){
+//        return level;
+//    }
+
+    public String getName(){
+        return name();
     }
 }

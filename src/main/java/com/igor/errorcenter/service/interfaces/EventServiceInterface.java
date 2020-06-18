@@ -15,24 +15,24 @@ public interface EventServiceInterface{
 
     Optional<Event> findById(Long id);
 
-    Optional<Event> update(Event event);
+    Event update(Event event);
 
     void delete(Long id);
 
-    Optional<List<Event>> findByLevel(String level, Pageable pageable);
+    List<Event> findByLevel(String level, Pageable pageable);
 
-    Optional<List<Event>> findByLevelAndDate(String level, LocalDateTime date, Pageable pageable);
+    List<Event> findByLevelAndDate(String level, LocalDateTime date, Pageable pageable);
 
-    Optional<List<Event>> findByLevelAndDateAndOrigin(String level, LocalDateTime date, Long idOrigin, Pageable pageable);
+    List<Event> findByLevelAndDateAndOrigin(String level, LocalDateTime date, Long idOrigin, Pageable pageable);
 
-    Optional<List<Event>> findByEventDescription(String eventDescription, Pageable pageable);
+    List<Event> findByEventDescription(String eventDescription, Pageable pageable);
 
-    Optional<List<Event>> findByOrigin(Long idOrigin, Pageable pageable);
+    List<Event> findByOrigin(Long idOrigin, Pageable pageable);
 
-    Optional<List<Event>> findByOriginAndDate(Long idOrigin, LocalDateTime date);
+    List<Event> findByOriginAndDate(Long idOrigin, LocalDateTime date);
 
-    Optional<List<Event>> findByCreatedAt(LocalDateTime date, Pageable pageable);
+    List<Event> findByCreatedAt(LocalDateTime date, Pageable pageable);
 
-    Optional<List<Event>> findByEventLog(String log, Pageable pageable);
+    List<Event> findByEventLog(String log, Pageable pageable);
 
 }

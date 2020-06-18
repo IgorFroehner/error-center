@@ -1,5 +1,6 @@
 package com.igor.errorcenter.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class Event {
     private String eventDescription;
 
     @NotNull
-    @Column
+    @JsonIgnore
     @Size(max = 500)
     private String eventLog;
 

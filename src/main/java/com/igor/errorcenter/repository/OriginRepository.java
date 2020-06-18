@@ -9,6 +9,11 @@ import java.util.Optional;
 @Repository
 public interface OriginRepository extends JpaRepository<Origin, Long> {
 
+    Origin save(Origin origin);
+
+    @Override
+    void delete(Origin origin);
+
     @Override
     Optional<Origin> findById(Long aLong);
 

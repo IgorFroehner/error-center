@@ -3,6 +3,8 @@ package com.igor.errorcenter.repository;
 import com.igor.errorcenter.entity.Event;
 import com.igor.errorcenter.entity.Level;
 import com.igor.errorcenter.entity.Origin;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,22 +16,22 @@ import java.util.Optional;
 public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Override
-    Event save(Event e);
+    Page<Event> findAll(Pageable pageable);
 
     @Override
-    List<Event> findAll();
+    <S extends Event> S save(S s);
 
     @Override
     Optional<Event> findById(Long id);
 
-    Optional<List<Event>> findByLevel(Level level);
+    Page<Event> findByLevel(Level level, Pageable pageable);
 
-    Optional<List<Event>> findByEventDescription(String eventDescription);
+    Page<Event> findByEventDescription(String eventDescription, Pageable pageable);
 
-    Optional<List<Event>> findByOrigin(Origin origin);
+    Page<Event> findByOrigin(Origin origin, Pageable pageable);
 
-    Optional<List<Event>> findByCreatedAt(LocalDateTime date);
+    Page<Event> findByCreatedAt(LocalDateTime date, Pageable pageable);
 
-    Optional<List<Event>> findByEventLog(String log);
+    Page<Event> findByEventLog(String log, Pageable pageable);
 
 }

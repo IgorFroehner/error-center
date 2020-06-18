@@ -4,6 +4,7 @@ import com.igor.errorcenter.entity.Event;
 import com.igor.errorcenter.service.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,22 +21,22 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> create(@Valid @RequestBody Event event){
-        return null;
+        return new ResponseEntity<Event>(this.eventService.save(event), HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<Event> update(@Valid @RequestBody Event event){
-        return null;
+        return new ResponseEntity<Event>(this.eventService.save(event), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Event> findById(@PathVariable("id") Long id){
-        return null;
+        return new ResponseEntity<Event>(this.eventService.findById(id).get(), HttpStatus.ACCEPTED);
     }
 
     @GetMapping
     public List<Event> findAll(Pageable pageable){
-        return null;
+        return this.eventService.findAll(pageable);
     }
 
     @GetMapping("/byOrigin/{idOrigin}")
