@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class OriginService implements UserDetailsService, OriginServiceInterface {
@@ -40,14 +42,12 @@ public class OriginService implements UserDetailsService, OriginServiceInterface
     }
 
     @Override
-    public Origin findById(Long id) {
-        return this.originRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Origin not found"));
+    public Optional<Origin> findById(Long id) {
+        return this.originRepository.findById(id);
     }
 
     @Override
-    public Origin findByLogin(String login) {
-        return this.originRepository.findByLogin(login).orElseThrow(
-                () -> new UsernameNotFoundException("Login not found"));
+    public Optional<Origin> findByLogin(String login) {
+        return this.originRepository.findByLogin(login);
     }
 }

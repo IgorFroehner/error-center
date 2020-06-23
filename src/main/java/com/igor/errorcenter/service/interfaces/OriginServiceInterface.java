@@ -2,6 +2,8 @@ package com.igor.errorcenter.service.interfaces;
 
 import com.igor.errorcenter.entity.Origin;
 
+import java.util.Optional;
+
 public interface OriginServiceInterface{
 
     Origin save(Origin origin);
@@ -10,8 +12,8 @@ public interface OriginServiceInterface{
 
     void delete(Long id);
 
-    Origin findById(Long id);
+    Optional<Origin> findById(Long id);
 
-    Origin findByLogin(String login);
+    Optional<Origin> findByLogin(String login);
 
 }

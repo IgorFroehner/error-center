@@ -2,6 +2,8 @@
 
 ### links úteis:
 https://spring.io/guides/tutorials/bookmarks/
+https://www.baeldung.com/spring-date-parameters
+https://www.baeldung.com/spring-boot-formatting-json-dates
 
 # Central de Erros
 
@@ -20,14 +22,14 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
 
 ### Funcionalidades
 
-* Deve permitir a autenticação do sistema que deseja utilizar a API gerando o Token de Acesso
-* Pode ser acessado por multiplos sistemas
-* Deve permitir gravar registros de eventos de log salvando informações de Level(error, warning, info), Descrição do Evento, LOG do Evento, ORIGEM(Sistema ou Serviço que originou o evento), DATA(Data do evento), QUANTIDADE(Quantidade de Eventos de mesmo tipo)
-* Deve permitir a listagem dos eventos juntamente com a filtragem de eventos por qualquer parâmetro especificado acima
-* Deve suportar Paginação
-* Deve suportar Ordenação por diferentes tipos de atributos
-* A consulta de listagem não deve retornar os LOGs dos Eventos
-* Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
+- [x] Deve permitir a autenticação do sistema que deseja utilizar a API gerando o Token de Acesso
+- [x] Pode ser acessado por multiplos sistemas
+- [ ] Deve permitir gravar registros de eventos de log salvando informações de Level(error, warning, info), Descrição do Evento, LOG do Evento, ORIGEM(Sistema ou Serviço que originou o evento), DATA(Data do evento), QUANTIDADE(Quantidade de Eventos de mesmo tipo)
+- [x] Deve permitir a listagem dos eventos juntamente com a filtragem de eventos por qualquer parâmetro especificado acima
+- [x] Deve suportar Paginação
+- [ ] Deve suportar Ordenação por diferentes tipos de atributos
+- [x] A consulta de listagem não deve retornar os LOGs dos Eventos
+- [ ] Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
 
 ### Endpoint
 
@@ -53,3 +55,8 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
     * Origin findById
     * List<Origin> findByLogin
     * List<Event> findEvents
+    
+### Bons testes para fazer
+
+localhost:8080/event/byLevel/info
+

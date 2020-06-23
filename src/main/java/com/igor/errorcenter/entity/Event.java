@@ -1,17 +1,15 @@
 package com.igor.errorcenter.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @EqualsAndHashCode(of = "id")
@@ -45,6 +43,55 @@ public class Event {
 
     @CreatedDate
     @Column
-    private LocalDateTime createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date createdAt;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getEventLog() {
+        return eventLog;
+    }
+
+    public void setEventLog(String eventLog) {
+        this.eventLog = eventLog;
+    }
+
+    public Origin getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Origin origin) {
+        this.origin = origin;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }
