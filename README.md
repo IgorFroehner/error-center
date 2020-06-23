@@ -53,10 +53,4 @@ Abaixo estão os requisitos desta API, o time terá total liberdade para tomar a
     * Origin update
     * void delete
     * Origin findById
-    * List<Origin> findByLogin
-    * List<Event> findEvents
-    
-### Bons testes para fazer
-
-localhost:8080/event/byLevel/info
-
+    * Origin findByLogin
