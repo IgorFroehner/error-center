@@ -34,7 +34,6 @@ public class Event {
     private String eventDescription;
 
     @NotNull
-    @JsonIgnore
     @Size(max = 500)
     private String eventLog;
 

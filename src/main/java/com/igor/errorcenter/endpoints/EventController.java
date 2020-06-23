@@ -1,11 +1,12 @@
 package com.igor.errorcenter.endpoints;
 
+import com.igor.errorcenter.dto.EventDTO;
 import com.igor.errorcenter.dto.EventLogDTO;
 import com.igor.errorcenter.entity.Event;
-import com.igor.errorcenter.mapper.EventMapper;
 import com.igor.errorcenter.service.EventService;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -25,7 +27,8 @@ public class EventController {
 
     private EventService eventService;
 
-//    private EventMapper mapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @PostMapping
     public ResponseEntity<Event> create(@Valid @RequestBody Event event){
@@ -37,62 +40,72 @@ public class EventController {
         return new ResponseEntity<Event>(this.eventService.save(event), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<EventLogDTO> findById(@PathVariable("id") Long id){
-//        return new ResponseEntity<EventLogDTO>(this.eventService.findById(id).map(mapper::map).orElse(null),
-//                HttpStatus.ACCEPTED);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<EventLogDTO> findById(@PathVariable("id") Long id){
+        return new ResponseEntity<EventLogDTO>(convertToEventLogDto(this.eventService.findById(id).get()),
+                HttpStatus.ACCEPTED);
+    }
 
     @GetMapping
-    public List<Event> findAll(@RequestParam(defaultValue = "0") int page,
+    public List<EventDTO> findAll(@RequestParam(defaultValue = "0") int page,
                                @RequestParam(defaultValue = "10") int size,
                                @RequestParam(defaultValue = "id") String sortBy){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findAll(pageable);
+        return this.eventService.findAll(pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byOrigin/{idOrigin}")
-    public List<Event> findByOrigin(@RequestParam(defaultValue = "0") int page,
+    public List<EventDTO> findByOrigin(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size,
                                     @RequestParam(defaultValue = "id") String sortBy,
                                     @PathVariable("idOrigin") Long idOrigin){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByOrigin(idOrigin, pageable);
+        return this.eventService.findByOrigin(idOrigin, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byOriginAndDate/{idOrigin}/{date}")
-    public List<Event> findByOriginAndDate(@RequestParam(defaultValue = "0") int page,
+    public List<EventDTO> findByOriginAndDate(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "10") int size,
                                            @RequestParam(defaultValue = "id") String sortBy,
                                            @PathVariable("idOrigin") Long idOrigin,
                                            @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByOriginAndDate(idOrigin, date, pageable);
+        return this.eventService.findByOriginAndDate(idOrigin, date, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byLevel/{level}")
-    public List<Event> findByLevel(
+    public List<EventDTO> findByLevel(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @PathVariable("level") String level){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByLevel(level, pageable);
+        return this.eventService.findByLevel(level, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byLevelAndDate/{level}/{date}")
-    public List<Event> findByLevelAndDate(
+    public List<EventDTO> findByLevelAndDate(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
             @PathVariable("level") String level,
             @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByLevelAndDate(level, date, pageable);
+        return this.eventService.findByLevelAndDate(level, date, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byLevelAndDateAndOrigin/{level}/{date}/{idOrigin}")
-    List<Event> findByLevelAndDateAndOrigin(
+    public List<EventDTO> findByLevelAndDateAndOrigin(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy,
@@ -100,34 +113,52 @@ public class EventController {
             @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
             @PathVariable("idOrigin") Long idOrigin){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByLevelAndDateAndOrigin(level, date, idOrigin, pageable);
+        return this.eventService.findByLevelAndDateAndOrigin(level, date, idOrigin, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byDescription/{description}")
-    List<Event> findByDescription(@RequestParam(defaultValue = "0") int page,
+    public List<EventDTO> findByDescription(@RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "10") int size,
                                   @RequestParam(defaultValue = "id") String sortBy,
                                   @PathVariable("description") String description){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByEventDescription(description, pageable);
+        return this.eventService.findByEventDescription(description, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byLog/{log}")
-    List<Event> findByLog(@RequestParam(defaultValue = "0") int page,
+    public List<EventDTO> findByLog(@RequestParam(defaultValue = "0") int page,
                           @RequestParam(defaultValue = "10") int size,
                           @RequestParam(defaultValue = "id") String sortBy,
                           @PathVariable("log") String log){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByEventLog(log, pageable);
+        return this.eventService.findByEventLog(log, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/byDate/{date}")
-    List<Event> findByDate(@RequestParam(defaultValue = "0") int page,
+    List<EventDTO> findByDate(@RequestParam(defaultValue = "0") int page,
                            @RequestParam(defaultValue = "10") int size,
                            @RequestParam(defaultValue = "id") String sortBy,
                            @PathVariable("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, sortBy);
-        return this.eventService.findByCreatedAt(date, pageable);
+        return this.eventService.findByCreatedAt(date, pageable).stream()
+                .map(this::convertToEventDto)
+                .collect(Collectors.toList());
+    }
+
+    private EventLogDTO convertToEventLogDto(Event event){
+        EventLogDTO eventLogDTO = modelMapper.map(event, EventLogDTO.class);
+        return eventLogDTO;
+    }
+
+    private EventDTO convertToEventDto(Event event){
+        EventDTO eventDTO = modelMapper.map(event, EventDTO.class);
+        return eventDTO;
     }
 
 }
